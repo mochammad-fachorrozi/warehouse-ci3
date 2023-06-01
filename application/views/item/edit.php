@@ -26,12 +26,24 @@ foreach ($datas as $key => $data) :
                         <input type="text" class="form-control" name="name" id="name" value="<?= $data->name; ?>">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="stock" class="col-sm-2 col-sm-form-label">Stock</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" name="stock" id="stock" value="<?= $data->stock; ?>">
+                <?php if ($user['role_id'] == 1) { ?>
+
+                    <div class="form-group row">
+                        <label for="stock" class="col-sm-2 col-sm-form-label">Stock</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="stock" id="stock" value="<?= $data->stock; ?>">
+                        </div>
                     </div>
-                </div>
+
+                <?php } else { ?>
+                    <div class="form-group row">
+                        <label for="stock" class="col-sm-2 col-sm-form-label">Stock</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="stock" id="stock" value="<?= $data->stock; ?>" readonly>
+                        </div>
+                    </div>
+                <?php } ?>
+
 
 
                 <!-- Category -->

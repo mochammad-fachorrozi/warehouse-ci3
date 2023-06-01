@@ -77,7 +77,7 @@ class Item extends CI_Controller
     {
         $data['title'] = 'Item';
         // $data['datas'] = $this->db->get('item')->result();
-        $data['datas'] = $this->item_model->getDataJoin()->result();
+        $data['datas'] = $this->item_model->getDataJoin();
         // var_dump($data['datas'][0]->cate_name);
         // die;
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -95,7 +95,7 @@ class Item extends CI_Controller
         $data['datas'] = $this->db->get('item')->result();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        // Item model
+        // category model
         $data['categories'] = $this->category_model->getData()->result();
         $data['sumCategory'] = $this->category_model->getData()->num_rows();
 
@@ -237,7 +237,8 @@ class Item extends CI_Controller
     {
         $code = $this->input->post('code');
         $image = $this->item_model->getImage($code);
-
+        // var_dump($image);
+        // die;
         if ($image) {
             if ($image == 'default.jpg') {
             } else {
@@ -250,5 +251,19 @@ class Item extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Item deleted successfully!!</div>');
         redirect('item/item');
+    }
+
+    public function itemById($id)
+    {
+        $data['title'] = 'Item';
+        $data['datas'] = $this->item_model->getDataJoinById($id);
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('item/item', $data);
+        $this->load->view('templates/footer');
     }
 }

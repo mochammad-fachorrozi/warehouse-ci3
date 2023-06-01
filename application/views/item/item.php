@@ -41,7 +41,13 @@
                                 <td><?= $data->cate_name ?></td>
                                 <td><img src="<?= base_url('assets/img/item/') . $data->image; ?>" alt="image <?= $data->name; ?>" class="img-thumbnail" width="100"></td>
                                 <td>
-                                    <a href="<?= base_url('item/edit/' . $data->code) ?>" class="btn btn-sm btn-success">Edit</a> <a data-toggle="modal" data-target="#deleteItem<?= $data->code ?>" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="<?= base_url('item/edit/' . $data->code) ?>" class="btn btn-sm btn-success">Edit</a>
+
+                                    <?php if ($user['role_id'] == 1) { ?>
+
+                                        <a data-toggle="modal" data-target="#deleteItem<?= $data->code ?>" class="btn btn-sm btn-danger">Delete</a>
+
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -58,7 +64,7 @@
 
 <!-- Delete Modal -->
 <?php foreach ($datas as $key => $data) : ?>
-    <div class="modal fade" id="deleteItem<?= $data->id ?>" tabindex="-1" aria-labelledby="deleteItemLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteItem<?= $data->code ?>" tabindex="-1" aria-labelledby="deleteItemLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -68,7 +74,7 @@
                 <form action="<?= base_url('item/delete'); ?>" method="post">
                     <div class="modal-body">
                         <div class="form-group text-center">
-                            <input type="hidden" class="form-control" id="id" name="id" placeholder="ID" value="<?= $data->id ?>">
+                            <input type="hidden" class="form-control" id="code" name="code" placeholder="ID" value="<?= $data->code ?>">
 
                             <h6>Are you Sure ?</h6>
                         </div>

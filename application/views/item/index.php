@@ -31,9 +31,16 @@
                         foreach ($datas as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $data['name']; ?></td>
+                                <td><a href="<?= base_url('item/itemById/' . $data['id']) ?>"><?= $data['name']; ?></a></td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editCategory<?= $data['id'] ?>">Edit</a> <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCategory<?= $data['id'] ?>">Delete</a>
+                                    <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#editCategory<?= $data['id'] ?>">Edit</a>
+
+                                    <?php if ($user['role_id'] == 1) { ?>
+
+                                        <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCategory<?= $data['id'] ?>">Delete</a>
+                                    <?php } else { ?>
+
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -46,7 +53,6 @@
 
 </div>
 <!-- /.container-fluid -->
-
 
 
 
@@ -104,8 +110,6 @@
 <?php endforeach; ?>
 
 
-
-
 <!-- Delete Modal -->
 <?php foreach ($datas as $key => $data) : ?>
     <div class="modal fade" id="deleteCategory<?= $data['id'] ?>" tabindex="-1" aria-labelledby="deleteCategoryLabel" aria-hidden="true">
@@ -118,7 +122,7 @@
                 <form action="<?= base_url('item/destroy'); ?>" method="post">
                     <div class="modal-body">
                         <div class="form-group text-center">
-                            <input type="hidden" class="form-control" id="id" name="id" placeholder="ID" value="<?= $data['id'] ?>">
+                            <input type="hidden" class="form-control" id="code" name="code" value="<?= $data['code'] ?>">
 
                             <h6>Are you Sure ?</h6>
                         </div>

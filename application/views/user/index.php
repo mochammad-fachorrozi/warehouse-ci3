@@ -10,6 +10,11 @@
         </div>
     </div>
 
+    <div class="mb-2 col-lg-8 text-right p-0">
+
+        <a href="<?= base_url('user/edit') ?>" class="btn btn-success align-end">Edit Profile</a>
+    </div>
+
     <div class="card mb-3 col-lg-8">
         <div class="row g-0">
             <div class="col-md-4">
@@ -24,9 +29,6 @@
             </div>
         </div>
     </div>
-
-</div>
-<!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->

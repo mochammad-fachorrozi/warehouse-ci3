@@ -17,7 +17,27 @@ class Item_model extends CI_Model
         $this->db->join('category as c', 'i.category_id = c.id');
         $this->db->order_by('i.id', 'DESC');
 
-        return $query = $this->db->get();
+        return $this->db->get()->result();
+    }
+
+    public function getDataJoinById($id)
+    {
+        $this->db->select('i.*, c.name as cate_name');
+        $this->db->from('item as i');
+        $this->db->join('category as c', 'i.category_id = c.id');
+        $this->db->where('i.category_id', $id);
+        $this->db->order_by('i.id', 'DESC');
+
+        return $this->db->get()->result();
+    }
+
+    public function getDataByName($name)
+    {
+        $this->db->select('*');
+        $this->db->from('item');
+        $this->db->where('name', $name);
+
+        return $this->db->get()->result();
     }
 
     public function createCode()
@@ -39,11 +59,11 @@ class Item_model extends CI_Model
         return $kodeFix;
     }
 
-    public function getImage($id)
+    public function getImage($code)
     {
         $this->db->select("image");
         $this->db->from("item");
-        $this->db->where("id", $id);
+        $this->db->where("code", $code);
         return $this->db->get()->result();
     }
 }

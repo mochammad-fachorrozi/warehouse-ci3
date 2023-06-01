@@ -2,7 +2,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Web Programming Unpas <?= date('Y', $user['date_created']); ?></span>
+                    <span>Copyright &copy; Mochammad Fachorrozi <?= date('Y', $user['date_created']); ?></span>
                 </div>
             </div>
         </footer>
