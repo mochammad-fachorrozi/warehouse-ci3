@@ -20,4 +20,4 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body style="background-image: url('assets/img/bg.jpg');">

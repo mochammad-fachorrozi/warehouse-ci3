@@ -100,7 +100,7 @@
                     'email' => htmlspecialchars($email),
                     'image' => 'default.png',
                     'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                    'role_id'  => 2,
+                    'role_id'  => 3,
                     'is_active' => 0,
                     'date_created' => time()
                 ];
