@@ -14,6 +14,8 @@
         <div class="card-header py-3">
             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
             <a href="<?= base_url() ?>transaction/createOutput" class="btn btn-primary mb-3">Add Output Item</a>
+            <a href="<?= base_url() ?>transaction/printOutput" class="btn btn-dark mb-3"><i class="fas fa-print"></i> Print</a>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">

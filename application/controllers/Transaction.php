@@ -180,6 +180,13 @@ class Transaction extends CI_Controller
         redirect('transaction');
     }
 
+    function print()
+    {
+        $data['datas'] = $this->input_item_model->getDataJoin()->result();
+        $data['title'] = 'Data Input Item';
+
+        $this->load->view('transaction/print', $data);
+    }
 
 
     // Output Item
@@ -345,5 +352,14 @@ class Transaction extends CI_Controller
         $this->db->update('output_item');
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Successfully rejected data!</div>');
         redirect('transaction/indexOutput');
+    }
+
+
+    function printOutput()
+    {
+        $data['datas'] = $this->output_item_model->getDataJoin()->result();
+        $data['title'] = 'Data Output Item';
+
+        $this->load->view('transaction/print', $data);
     }
 }
