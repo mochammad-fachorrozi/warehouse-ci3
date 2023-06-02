@@ -53,7 +53,7 @@
                         if ($user['role_id'] == 1) {
                             redirect('admin');
                         } else {
-                            redirect('user');
+                            redirect('item');
                         }
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
@@ -101,22 +101,22 @@
                     'image' => 'default.png',
                     'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                     'role_id'  => 3,
-                    'is_active' => 0,
+                    'is_active' => 1, //0
                     'date_created' => time()
                 ];
 
                 // siapkan token
-                $token = base64_encode(random_bytes(32));
-                $user_token = [
-                    'email' => $email,
-                    'token' => $token,
-                    'date_created' => time()
-                ];
+                // $token = base64_encode(random_bytes(32));
+                // $user_token = [
+                //     'email' => $email,
+                //     'token' => $token,
+                //     'date_created' => time()
+                // ];
 
                 $this->db->insert('user', $data);
-                $this->db->insert('user_token', $user_token);
+                // $this->db->insert('user_token', $user_token);
 
-                $this->_sendEmail($token, 'verify');
+                // $this->_sendEmail($token, 'verify');
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                 Congratulation! your account has been created. Please activate your account</div>');

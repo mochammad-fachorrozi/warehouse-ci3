@@ -59,17 +59,17 @@
                                 </td>
                                 <td><?= $data->date ?></td>
                                 <td><?= $data->name ?></td>
-                                <td>
 
-                                    <?php if ($user['role_id'] == '3') { ?>
+                                <?php if ($user['role_id'] == '3') { ?>
 
-                                    <?php } else { ?>
+                                <?php } else { ?>
+                                    <td>
                                         <a data-toggle="modal" data-target="#approve<?= $data->code ?>" class="btn btn-sm btn-warning">Approved ?</a>
                                         <a href="<?= base_url('transaction/edit/' . $data->code) ?>" class="btn btn-sm btn-success">Edit</a>
                                         <a data-toggle="modal" data-target="#deleteItem<?= $data->code ?>" class="btn btn-sm btn-danger">Delete</a>
-                                    <?php } ?>
+                                    </td>
+                                <?php } ?>
 
-                                </td>
                             </tr>
                         <?php endforeach; ?>
 
