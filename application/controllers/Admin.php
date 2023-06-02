@@ -8,12 +8,17 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+
+        $this->load->model('user_model');
     }
 
     public function index()
     {
         $data['title'] = 'Dashboard';
-        $data['test'] = $this->db->get('user')->result();
+        $data['role'] = $this->db->get('user_role')->result();
+        $data['test'] = $this->user_model->getDataJoin();
+        // var_dump($data['test']);
+        // die;
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->view('templates/header', $data);
@@ -72,7 +77,42 @@ class Admin extends CI_Controller
             $this->db->delete('user_access_menu', $data);
         }
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Access Changed!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Access Changed!</div>');
+    }
+
+    public function update()
+    {
+        $this->form_validation->set_rules('role_id', 'Role ID', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $id = $this->input->post('id');
+            $role_id = $this->input->post('role_id');
+
+            // var_dump($role_id);
+            // die;
+
+            $this->db->set('role_id', $role_id);
+            $this->db->where('id', $id);
+            $this->db->update('user');
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User has been updated!!</div>');
+            redirect('admin');
+        }
+    }
+
+    public function destroy()
+    {
+        $id = $this->input->post('id');
+
+        $this->db->where('id', $id);
+        $this->db->delete('user');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User deleted successfully!!</div>');
+        redirect('admin');
     }
 }
